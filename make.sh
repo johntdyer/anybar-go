@@ -25,3 +25,6 @@ else
   echo "Build error"
   exit $?
 fi
+
+chmod +x builds/$APPNAME.linux
+chmod +x builds/$APPNAME.osx
