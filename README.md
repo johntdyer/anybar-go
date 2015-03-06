@@ -1,10 +1,14 @@
 # anybar-go
-Go CLI for Anybar ( https://github.com/tonsky/AnyBar )
+
+Small go app to send commands to [Anybar](https://github.com/tonsky/AnyBar).
 
 
 ## Building
 
-./make.sh
+* Build artifact `./make.sh`
+* Copy to bin `cp builds/anybar-go.osx ~/bin/anybar-go`
+* Profit
+
 
 ## Development
 go get github.com/tools/godep
@@ -19,7 +23,7 @@ NAME:
    anybar-go - Anybar CLI
 
 USAGE:
-   anybar-go [global options] command [command options]
+   anybar-go [global options] command [command options] [arguments...]
 
 VERSION:
    0.0.1
@@ -33,14 +37,21 @@ COMMANDS:
 GLOBAL OPTIONS:
    --port, -p '1738'    Port to connect to anybar [$ANYBAR_PORT]
    --address, -a 'localhost'  Address to send message.
-   --msg, -m      Message to send to anybar
    --help, -h     show help
-   --version, -v
+   --version, -v    print the version
+
 ```
 
 
 ### Sending message
 
-#### Default
+#### Defaults
 
-    ./anybar-go.osx --msg green
+    ./anybar-go.osx green
+
+#### Setting port
+
+    ./anybar-go.osx green -p 2000
+
+
+
