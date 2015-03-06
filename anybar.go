@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/johntdyer/anybar-go/Godeps/_workspace/src/github.com/codegangsta/cli"
+	"github.com/johntdyer/anybar-go/Godeps/_workspace/src/github.com/wsxiaoys/terminal"
 	"log"
 	"net"
 	"os"
@@ -19,20 +20,31 @@ func main() {
 	app.Email = "johntdyer@gmail.com"
 
 	app.Flags = []cli.Flag{
-		cli.StringFlag{Name: "port, p", Value: "1738", Usage: "Port to connect to any-bar. Default 1738"},
-		cli.StringFlag{Name: "address, a", Value: "localhost", Usage: "Address to send message. Default localhost"},
-		cli.StringFlag{Name: "msg, m", Value: "", Usage: "Message to send to anybar"},
+
+		cli.StringFlag{
+			Name:   "port, p",
+			Value:  "1738",
+			Usage:  "Port to connect to anybar",
+			EnvVar: "ANYBAR_PORT",
+		},
+
+		cli.StringFlag{Name: "address, a",
+			Value: "localhost",
+			Usage: "Address to send message.",
+		},
 	}
 
 	app.Action = func(c *cli.Context) {
-		if c.String("msg") == "" {
-			fmt.Println("Message is required")
-			os.Exit(0)
+		msg := ""
+		if len(c.Args()) > 0 {
+			msg = c.Args()[0]
+			addr := fmt.Sprintf("%s:%s", c.String("address"), c.String("port"))
+			sendPacket(msg, addr)
+		} else {
+
+			terminal.Stdout.Color("r").Print("Message is required").Nl().Reset()
+
 		}
-
-		addr := fmt.Sprintf("%s:%s", c.String("address"), c.String("port"))
-
-		sendPacket(c.String("msg"), addr)
 
 	}
 
@@ -59,6 +71,7 @@ func sendPacket(msg string, addr string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Sent %s, success\n", msg)
+
+	terminal.Stdout.Color("b").Print(fmt.Sprintf("Sent '%s' successfully", msg)).Nl().Reset()
 
 }

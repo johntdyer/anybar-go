@@ -9,6 +9,10 @@
 			"ImportPath": "github.com/codegangsta/cli",
 			"Comment": "1.2.0-50-ga14c5b4",
 			"Rev": "a14c5b47c7efa4ff80cc42e1079a34b4756f2311"
+		},
+		{
+			"ImportPath": "github.com/wsxiaoys/terminal",
+			"Rev": "9dcaf1d63119a8ac00eef82270eaef08b6aa2328"
 		}
 	]
 }
